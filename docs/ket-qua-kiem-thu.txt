@@ -1,6 +1,6 @@
 ﻿================================================================================
 KIỂM THỬ TỰ ĐỘNG - ĐỀ TÀI 43: ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ
-Thời gian kiểm thử: 2026-10-31 21:47:09
+Thời gian kiểm thử: 2026-10-31 21:53:28
 Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone
 ================================================================================
 [1/3] Xoá thư mục bin/ cũ và khởi tạo lại...
@@ -55,6 +55,7 @@ Biên dịch thành công 35 tệp Java!
 ?  ?  ?? F09: L?c danh sách sinh viên v?ng m?t b?ng Streams API chính xác và có s?p x?p ?
 ?  ?  ?? F09: C? l?p có m?t 100% thì danh sách v?ng r?ng ?
 ?  ?  ?? F09: C? l?p v?ng 100% thì danh sách v?ng b?ng danh sách l?p ?
+?  ?  ?? F15: Th?ng kê chuyên c?n c? k? và l?c chính xác sinh viên v?ng >= 20% ?
 ?  ?  ?? F10: X? lý an toàn khi s? s? b?ng 0 (không b? ArithmeticException) ?
 ?  ?? Ki?m th? T?ng L?u Tr? CSV - Ch?c n?ng F02 ?
 ?  ?  ?? Ném ngo?i l? khi dòng CSV sai ??nh d?ng (thi?u c?t) ?
@@ -78,18 +79,18 @@ Biên dịch thành công 35 tệp Java!
 ?     ?? F04: Gi?ng viên ?óng phiên th? công tr??c gi? thì h?y h?n gi? thành công ?
 ?? JUnit Vintage ?
 ?? JUnit Platform Suite ?
-Test run finished after 3822 ms
+Test run finished after 3809 ms
 [        13 containers found      ]
 [         0 containers skipped    ]
 [        13 containers started    ]
 [         0 containers aborted    ]
 [        13 containers successful ]
 [         0 containers failed     ]
-[        53 tests found           ]
+[        54 tests found           ]
 [         0 tests skipped         ]
-[        53 tests started         ]
+[        54 tests started         ]
 [         0 tests aborted         ]
-[        53 tests successful      ]
+[        54 tests successful      ]
 [         0 tests failed          ]
 => Kết quả lần 1: ĐẠT
 
