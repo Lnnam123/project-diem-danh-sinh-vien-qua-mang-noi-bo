@@ -4,6 +4,8 @@ bin/
 
 # Temporary build artifacts
 sources.txt
+test-sources.txt
+*-sources.txt
 *.log
 
 # Eclipse project files

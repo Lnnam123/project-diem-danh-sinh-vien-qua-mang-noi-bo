@@ -1,6 +1,6 @@
 # Đề tài 43: Điểm danh lớp học qua mạng nội bộ
 **Học phần:** Lập trình Java nâng cao (AJP201)  
-**Môi trường:** Java JDK 21 LTS (chỉ dùng thư viện chuẩn `java.util`, `java.util.concurrent`, `java.net`, `java.io`, `java.nio`, `java.time`)
+**Môi trường:** Java JDK 21 LTS (chỉ dùng thư viện chuẩn `java.util`, `java.util.concurrent`, `java.net`, `java.io`, `java.nio`, `java.time` và JUnit 5 cho kiểm thử)
 
 ---
 
@@ -13,6 +13,8 @@ Hệ thống cho phép giảng viên mở phiên điểm danh lớp học có gi
 
 ```text
 project-Điểm danh lớp học qua mạng nội bộ/
+├── .agents/                            # Kỹ năng Antigravity (drawio, superpowers)
+│   └── skills/
 ├── data/
 │   ├── danh-sach-lop.csv               # File CSV danh sách sinh viên lớp học
 │   └── ket-qua/                        # Thư mục lưu kết quả điểm danh từng buổi
@@ -24,6 +26,8 @@ project-Điểm danh lớp học qua mạng nội bộ/
 │       ├── so-do-lop-uml.drawio.png
 │       ├── so-do-tuan-tu.drawio.png
 │       └── luu-do-quy-trinh-phan-loi.drawio.png
+├── lib/                                # Thư viện bên ngoài (chỉ dùng JUnit 5)
+│   └── junit-platform-console-standalone-1.10.2.jar
 ├── src/
 │   └── vn/
 │       └── dau/
@@ -60,7 +64,13 @@ project-Điểm danh lớp học qua mạng nội bộ/
 │               └── giaodien/           # Tầng Giao diện Console Giảng viên
 │                   └── TeacherConsoleUI.java
 ├── bin/                                # Thư mục chứa các tệp bytecode sau khi biên dịch (.class)
-├── test/                               # Thư mục kiểm thử Unit Test
+├── test/                               # Thư mục kiểm thử Unit Test (JUnit 5)
+│   └── vn/
+│       └── dau/
+│           └── diemdanh/
+│               └── model/
+│                   └── SinhVienTest.java
+├── CLAUDE.md                           # Bộ nguyên tắc và quy chuẩn dự án cho AI
 ├── README.md                           # Tài liệu hướng dẫn dự án
 └── 2.plan-trien-khai-project.md        # Kế hoạch chi tiết 6 bước triển khai
 ```
@@ -100,19 +110,52 @@ java -cp bin vn.dau.diemdanh.mang.StudentClient localhost 8888 P01 22CNTT01
 
 ---
 
-## 4. Đóng gói ứng dụng thành file JAR độc lập (Chương 6)
+## 4. Kiểm thử tự động với JUnit 5
 
-### 4.1. Đóng gói Server JAR
+### 4.1. Biên dịch mã kiểm thử
+Biên dịch các tệp kiểm thử trong thư mục `test/` với classpath gồm `bin/` và thư viện JUnit 5 standalone trong `lib/`:
+
+```powershell
+Get-ChildItem -Path test -Recurse -Filter *.java | ForEach-Object { Resolve-Path -Relative $_.FullName } | Out-File -FilePath test-sources.txt -Encoding ascii
+javac -encoding UTF-8 -cp "bin;lib/*" -d bin "@test-sources.txt"
+Remove-Item test-sources.txt
+```
+
+### 4.2. Chạy toàn bộ kiểm thử
+Chạy bộ kiểm thử tự động bằng JUnit 5 Platform Console Launcher:
+
+```powershell
+java -jar lib/junit-platform-console-standalone-1.10.2.jar execute --class-path bin --scan-class-path
+```
+
+Kết quả hiển thị trên console:
+```text
+JUnit Jupiter ✔
+  Kiểm thử thực thể SinhVien ✔
+    ✔ Khởi tạo sinh viên hợp lệ thành công
+    ✔ Chuỗi trắng thừa ở hai đầu được cắt gọn tự động (strip)
+    ✔ Ném NullPointerException khi có trường thông tin bị null
+    ✔ Hai sinh viên cùng thông tin có equals và hashCode bằng nhau (record equality)
+
+[ 4 tests found ]
+[ 4 tests successful ]
+[ 0 tests failed ]
+```
+
+---
+
+## 5. Đóng gói ứng dụng thành file JAR độc lập (Chương 6)
+
+### 5.1. Đóng gói Server JAR
 ```powershell
 jar --create --file diemdanh-server.jar --main-class vn.dau.diemdanh.giaodien.TeacherConsoleUI -C bin .
 # Chạy server từ file JAR:
 java -jar diemdanh-server.jar
 ```
 
-### 4.2. Đóng gói Client JAR
+### 5.2. Đóng gói Client JAR
 ```powershell
 jar --create --file diemdanh-client.jar --main-class vn.dau.diemdanh.mang.StudentClient -C bin .
 # Chạy client từ file JAR:
 java -jar diemdanh-client.jar localhost 8888 P01 22CNTT01
 ```
-
