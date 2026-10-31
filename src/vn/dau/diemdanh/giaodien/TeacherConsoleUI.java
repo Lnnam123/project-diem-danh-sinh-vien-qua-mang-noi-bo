@@ -257,6 +257,12 @@ public class TeacherConsoleUI {
     }
 
     public static void main(String[] args) {
+        try {
+            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+            System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
+        } catch (Exception ignored) {
+        }
+
         PhienManager phienManager = new PhienManager();
         ChongGianLanService chongGianLan = new ChongGianLanService();
         ThongKeService thongKe = new ThongKeService();

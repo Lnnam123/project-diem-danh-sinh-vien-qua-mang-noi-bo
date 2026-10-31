@@ -3,6 +3,7 @@ package vn.dau.diemdanh.mang;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -47,6 +48,12 @@ public class StudentClient {
     }
 
     public static void main(String[] args) {
+        try {
+            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+            System.setErr(new PrintStream(System.err, true, StandardCharsets.UTF_8));
+        } catch (Exception ignored) {
+        }
+
         if (args.length < 4) {
             System.out.println("CÚ PHÁP: java vn.dau.diemdanh.mang.StudentClient <IP_Server> <Port> <Mã_Phiên> <Mã_SV>");
             System.out.println("VÍ DỤ:  java vn.dau.diemdanh.mang.StudentClient localhost 8888 P01 22CNTT01");
