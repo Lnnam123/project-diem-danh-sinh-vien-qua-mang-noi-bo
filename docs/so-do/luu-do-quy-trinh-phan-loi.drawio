@@ -1,0 +1,123 @@
+<mxfile host="Electron" modified="2026-10-31T00:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="luu-do-quy-trinh-phan-loi" name="Lưu đồ Quy trình Phần lõi">
+    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1400" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Tiêu đề -->
+        <mxCell id="title_flow" value="&lt;b&gt;LƯU ĐỒ QUY TRÌNH XỬ LÝ ĐIỂM DANH PHẦN LÕI (CORE CHECK-IN FLOWCHART)&lt;/b&gt;&lt;br&gt;Xác thực cú pháp, kiểm tra thời hạn phiên, chống trùng mã sinh viên &amp;amp; chống gửi hộ qua IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#343a40;fontColor=#212529;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="20" width="900" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Node Bắt đầu -->
+        <mxCell id="node_start" value="&lt;b&gt;BẮT ĐẦU&lt;/b&gt;&lt;br&gt;ClientHandler nhận kết nối TCP&lt;br&gt;từ StudentClient qua Socket" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="90" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Node Đọc dữ liệu -->
+        <mxCell id="node_read" value="Đọc dòng văn bản từ Socket:&lt;br&gt;&lt;code&gt;DIEM_DANH &amp;lt;maPhien&amp;gt; &amp;lt;maSV&amp;gt;&lt;/code&gt;&lt;br&gt;Lấy địa chỉ IP: &lt;code&gt;socket.getInetAddress()&lt;/code&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="440" y="180" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_start_read" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="node_start" target="node_read"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Q1: Kiểm tra cú pháp lệnh -->
+        <mxCell id="q_syntax" value="Cú pháp lệnh&lt;br&gt;hợp lệ?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="270" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read_q1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="node_read" target="q_syntax"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lỗi cú pháp -->
+        <mxCell id="err_syntax" value="Trả lỗi:&lt;br&gt;&lt;b&gt;ERROR Cú pháp không hợp lệ&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="285" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q1_no" value="Sai (No)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;" edge="1" parent="1" source="q_syntax" target="err_syntax"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Q2: Kiểm tra phiên điểm danh -->
+        <mxCell id="q_session" value="Phiên &amp;lt;maPhien&amp;gt;&lt;br&gt;đang mở &amp;amp; còn hạn?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="390" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q1_yes" value="Đúng (Yes)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;fontColor=#274e13;fontStyle=1;" edge="1" parent="1" source="q_syntax" target="q_session"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lỗi phiên đóng -->
+        <mxCell id="err_session" value="Trả lỗi:&lt;br&gt;&lt;b&gt;ERROR Phiên đã đóng hoặc hết hạn&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="405" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q2_no" value="Sai / Hết hạn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;" edge="1" parent="1" source="q_session" target="err_session"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Q3: Kiểm tra sinh viên trong danh sách lớp -->
+        <mxCell id="q_student" value="Sinh viên có trong&lt;br&gt;danh sách lớp (CSV)?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="510" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q2_yes" value="Đúng (Yes)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;fontColor=#274e13;fontStyle=1;" edge="1" parent="1" source="q_session" target="q_student"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lỗi SV không tồn tại -->
+        <mxCell id="err_student" value="Trả lỗi:&lt;br&gt;&lt;b&gt;ERROR Sinh viên không thuộc lớp&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="525" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q3_no" value="Không có (No)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;" edge="1" parent="1" source="q_student" target="err_student"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Q4: Chống gửi hộ qua IP (F14 Mở rộng) -->
+        <mxCell id="q_ip" value="[Chống gửi hộ]&lt;br&gt;IP này đã dùng cho&lt;br&gt;mã SV khác chưa?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="495" y="630" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q3_yes" value="Có (Yes)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;fontColor=#274e13;fontStyle=1;" edge="1" parent="1" source="q_student" target="q_ip"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Cảnh báo gian lận IP -->
+        <mxCell id="err_ip" value="Trả cảnh báo:&lt;br&gt;&lt;b&gt;ERROR Nghi vấn điểm danh hộ&lt;/b&gt;&lt;br&gt;(1 IP chỉ được điểm danh 1 SV)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="650" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q4_yes" value="Đã dùng cho SV khác" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;" edge="1" parent="1" source="q_ip" target="err_ip"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Q5: Chống trùng mã sinh viên (F05 Phần lõi) -->
+        <mxCell id="q_duplicate" value="Sinh viên này&lt;br&gt;đã điểm danh chưa?&lt;br&gt;&lt;code&gt;setCoMat.contains(maSV)&lt;/code&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="760" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q4_no" value="Chưa / Hợp lệ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;fontColor=#274e13;fontStyle=1;" edge="1" parent="1" source="q_ip" target="q_duplicate"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Thông báo đã điểm danh -->
+        <mxCell id="err_duplicate" value="Trả thông báo:&lt;br&gt;&lt;b&gt;ALREADY Sinh viên đã điểm danh rồi&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="780" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q5_yes" value="Đã điểm danh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;fontColor=#8c6b00;fontStyle=1;" edge="1" parent="1" source="q_duplicate" target="err_duplicate"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Thao tác ghi nhận thành công -->
+        <mxCell id="op_record" value="&lt;b&gt;Ghi nhận điểm danh thành công&lt;/b&gt;&lt;br&gt;• Thêm &lt;code&gt;maSV&lt;/code&gt; vào &lt;code&gt;Set&amp;lt;String&amp;gt;&lt;/code&gt;&lt;br&gt;• Thêm &lt;code&gt;LuotDiemDanh&lt;/code&gt; vào &lt;code&gt;ConcurrentHashMap&lt;/code&gt;&lt;br&gt;• Ánh xạ &lt;code&gt;IP -&amp;gt; maSV&lt;/code&gt;&lt;br&gt;• Tăng bộ đếm có mặt thời gian thực" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="460" y="890" width="280" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q5_no" value="Chưa (Lần đầu)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;fontColor=#274e13;fontStyle=1;" edge="1" parent="1" source="q_duplicate" target="op_record"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Gửi kết quả thành công -->
+        <mxCell id="send_success" value="Gửi thông điệp Socket thành công:&lt;br&gt;&lt;b&gt;SUCCESS Điểm danh thành công: [Họ tên]&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1005" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rec_send" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#274e13;" edge="1" parent="1" source="op_record" target="send_success"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Node Kết thúc -->
+        <mxCell id="node_end" value="&lt;b&gt;KẾT THÚC LƯỢT XỬ LÝ&lt;/b&gt;&lt;br&gt;Đóng socket máy khách&lt;br&gt;(try-with-resources)" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1095" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="e_succ_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;strokeColor=#333333;" edge="1" parent="1" source="send_success" target="node_end"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Nối các nhánh lỗi về Kết thúc -->
+        <mxCell id="e_err1_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;" edge="1" parent="1" source="err_syntax" target="node_end">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="315"/><mxPoint x="1100" y="1122"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_err2_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;" edge="1" parent="1" source="err_session" target="node_end">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="435"/><mxPoint x="1100" y="1122"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_err3_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;" edge="1" parent="1" source="err_student" target="node_end">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="555"/><mxPoint x="1100" y="1122"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_err4_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;" edge="1" parent="1" source="err_ip" target="node_end">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="680"/><mxPoint x="1100" y="1122"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_err5_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;" edge="1" parent="1" source="err_duplicate" target="node_end">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="810"/><mxPoint x="1100" y="1122"/></Array></mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+

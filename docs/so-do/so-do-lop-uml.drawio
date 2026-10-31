@@ -1,0 +1,112 @@
+<mxfile host="Electron" modified="2026-10-31T00:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="so-do-lop-uml" name="Sơ đồ Lớp UML">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Tiêu đề -->
+        <mxCell id="title_uml" value="&lt;b&gt;SƠ ĐỒ LỚP UML CHI TIẾT (CLASS DIAGRAM - AJP201)&lt;/b&gt;&lt;br&gt;Sử dụng: record (Ch6), enum (Ch6), sealed interface KetQua (Ch6), Concurrent Collections (Ch3, Ch4)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#343a40;fontColor=#212529;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="800" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- KHỐI 1: MODEL & ENUM -->
+        <!-- SinhVien -->
+        <mxCell id="c_SinhVien" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;record&amp;raquo;&lt;br&gt;&lt;b&gt;SinhVien&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- maSV: String&lt;br&gt;- hoTen: String&lt;br&gt;- lop: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ maSV(): String&lt;br&gt;+ hoTen(): String&lt;br&gt;+ lop(): String&lt;br&gt;+ equals(o: Object): boolean&lt;br&gt;+ hashCode(): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="200" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- PhienDiemDanh -->
+        <mxCell id="c_PhienDiemDanh" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;record&amp;raquo;&lt;br&gt;&lt;b&gt;PhienDiemDanh&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- maPhien: String&lt;br&gt;- thoiGianMo: LocalDateTime&lt;br&gt;- thoiLuongPhut: int&lt;br&gt;- trangThai: TrangThaiPhien&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ isConHieuLuc(): boolean&lt;br&gt;+ thoiGianKetThuc(): LocalDateTime&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="100" width="230" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- LuotDiemDanh -->
+        <mxCell id="c_LuotDiemDanh" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;record&amp;raquo;&lt;br&gt;&lt;b&gt;LuotDiemDanh&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- maSV: String&lt;br&gt;- maPhien: String&lt;br&gt;- thoiGianGui: LocalDateTime&lt;br&gt;- ipAddress: String&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ maSV(): String&lt;br&gt;+ ipAddress(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="540" y="100" width="210" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Enum TrangThaiPhien -->
+        <mxCell id="c_EnumPhien" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;&lt;b&gt;TrangThaiPhien&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ DANG_MO&lt;br&gt;+ DA_DONG&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="780" y="100" width="140" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- Enum TrangThaiDiemDanh -->
+        <mxCell id="c_EnumDiemDanh" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;enum&amp;raquo;&lt;br&gt;&lt;b&gt;TrangThaiDiemDanh&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ CO_MAT&lt;br&gt;+ VANG&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="940" y="100" width="150" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- KHỐI 2: SEALED KETQUA -->
+        <mxCell id="c_KetQua" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;sealed interface&amp;raquo;&lt;br&gt;&lt;b&gt;KetQua&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ isThanhCong(): boolean&lt;br&gt;+ thongDiep(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=default;strokeWidth=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="90" width="220" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="c_KQ_ThanhCong" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;record&amp;raquo;&lt;br&gt;&lt;b&gt;KetQua.ThanhCong&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- thongDiep: String&lt;br&gt;- duLieu: Object&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=10;fontFamily=Helvetica;html=1;fillColor=#ffffff;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="210" width="125" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_KQ_ThatBai" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&amp;laquo;record&amp;raquo;&lt;br&gt;&lt;b&gt;KetQua.ThatBai&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- lyDo: String&lt;br&gt;- maLoi: String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=10;fontFamily=Helvetica;html=1;fillColor=#ffffff;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1265" y="210" width="125" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e_kq_tc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="c_KQ_ThanhCong" target="c_KetQua"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_kq_tb" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="c_KQ_ThatBai" target="c_KetQua"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- KHỐI 3: SERVICES (TẦNG NGHIỆP VỤ) -->
+        <!-- PhienManager -->
+        <mxCell id="c_PhienManager" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;PhienManager&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- phienHienTai: PhienDiemDanh&lt;br&gt;- isDangMo: volatile boolean&lt;br&gt;- scheduler: ScheduledExecutorService&lt;br&gt;- scheduledFuture: ScheduledFuture&amp;lt;?&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ moPhien(maPhien: String, phut: int, onTimeout: Runnable): KetQua&lt;br&gt;+ dongPhien(): KetQua&lt;br&gt;+ getPhienHienTai(): Optional&amp;lt;PhienDiemDanh&amp;gt;&lt;br&gt;+ isConMo(): boolean&lt;br&gt;+ shutdown(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="50" y="340" width="350" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- ChongGianLanService -->
+        <mxCell id="c_ChongGianLan" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ChongGianLanService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- ipToMaSVMap: ConcurrentHashMap&amp;lt;String, String&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ kiemTraVaGhiNhanIP(ip: String, maSV: String): KetQua&lt;br&gt;+ reset(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="440" y="340" width="280" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- ThongKeService -->
+        <mxCell id="c_ThongKeService" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ThongKeService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ locDanhSachVang(dsLop: Collection&amp;lt;SinhVien&amp;gt;, setCoMat: Set&amp;lt;String&amp;gt;): List&amp;lt;SinhVien&amp;gt;&lt;br&gt;+ thongKeBuoi(tongSV: int, coMat: int): Map&amp;lt;String, Object&amp;gt;&lt;br&gt;+ thongKeChuyenCanCaKy(cacBuoi: List&amp;lt;BuoiDiemDanh&amp;gt;, nguong: double): List&amp;lt;CanhBaoSV&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="760" y="340" width="450" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- DiemDanhService (Trung tâm nghiệp vụ) -->
+        <mxCell id="c_DiemDanhService" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiemDanhService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- mapSinhVien: Map&amp;lt;String, SinhVien&amp;gt;&lt;br&gt;- setMaSVCoMat: Set&amp;lt;String&amp;gt;&lt;br&gt;- danhSachLuotDiemDanh: List&amp;lt;LuotDiemDanh&amp;gt;&lt;br&gt;- phienManager: PhienManager&lt;br&gt;- chongGianLan: ChongGianLanService&lt;br&gt;- thongKeService: ThongKeService&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ napDanhSachLop(ds: Map&amp;lt;String, SinhVien&amp;gt;): void&lt;br&gt;+ moPhien(maPhien: String, phut: int): KetQua&lt;br&gt;+ dongPhien(): KetQua&lt;br&gt;+ ghiNhanDiemDanh(maPhien: String, maSV: String, ip: String): KetQua&lt;br&gt;+ layDanhSachVang(): List&amp;lt;SinhVien&amp;gt;&lt;br&gt;+ laySoLuongCoMat(): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="350" y="520" width="460" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- Quan hệ giữa các Service -->
+        <mxCell id="e_dds_pm" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;dashed=0;strokeColor=#82b366;fillColor=#82b366;" edge="1" parent="1" source="c_DiemDanhService" target="c_PhienManager"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dds_cgl" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;dashed=0;strokeColor=#82b366;fillColor=#82b366;" edge="1" parent="1" source="c_DiemDanhService" target="c_ChongGianLan"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dds_tk" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;dashed=0;strokeColor=#82b366;fillColor=#82b366;" edge="1" parent="1" source="c_DiemDanhService" target="c_ThongKeService"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- KHỐI 4: TẦNG LƯU TRỮ -->
+        <mxCell id="c_CsvStorage" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CsvStorageService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ docDanhSachLop(path: Path): Map&amp;lt;String, SinhVien&amp;gt;&lt;br&gt;+ xuatKetQuaBuoi(path: Path, phien: PhienDiemDanh, dsLop: List&amp;lt;SinhVien&amp;gt;, setCoMat: Set&amp;lt;String&amp;gt;): void&lt;br&gt;+ docTatCaBuoi(dirPath: Path): List&amp;lt;BuoiDiemDanh&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="870" y="550" width="460" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- KHỐI 5: TẦNG MẠNG & GIAO DIỆN -->
+        <!-- ProtocolParser -->
+        <mxCell id="c_ProtocolParser" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ProtocolParser&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ parse(rawCommand: String): RequestCommand&lt;br&gt;+ formatResponse(status: String, message: String): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="50" y="780" width="340" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ClientHandler -->
+        <mxCell id="c_ClientHandler" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ClientHandler&lt;/b&gt;&lt;br&gt;&amp;laquo;implements Runnable&amp;raquo;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- socket: Socket&lt;br&gt;- service: DiemDanhService&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ run(): void&lt;br&gt;- xuLyYeuCau(line: String, clientIP: String): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="430" y="780" width="290" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- DiemDanhServer -->
+        <mxCell id="c_DiemDanhServer" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;DiemDanhServer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;- port: int&lt;br&gt;- serverSocket: ServerSocket&lt;br&gt;- threadPool: ExecutorService&lt;br&gt;- service: DiemDanhService&lt;br&gt;- isRunning: volatile boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ start(): void&lt;br&gt;+ stop(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="760" y="780" width="280" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- StudentClient -->
+        <mxCell id="c_StudentClient" value="&lt;p style=&quot;margin:0px;padding-top:4px;text-align:center;&quot;&gt;&lt;b&gt;StudentClient&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;text-align:left;&quot;&gt;+ guiDiemDanh(host: String, port: int, maPhien: String, maSV: String): String&lt;br&gt;+ main(args: String[]): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=11;fontFamily=Helvetica;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="780" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Quan hệ Network -> Service -->
+        <mxCell id="e_ch_dds" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#b85450;" edge="1" parent="1" source="c_ClientHandler" target="c_DiemDanhService"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_server_dds" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#b85450;" edge="1" parent="1" source="c_DiemDanhServer" target="c_DiemDanhService"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+

@@ -1,0 +1,23 @@
+# Compiled class files
+bin/
+*.class
+
+# Temporary build artifacts
+sources.txt
+*.log
+
+# Eclipse project files
+.metadata/
+.settings/
+.project
+.classpath
+
+# IntelliJ IDEA / VS Code IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS generated files
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store

@@ -1,0 +1,121 @@
+<mxfile host="Electron" modified="2026-10-31T00:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="phan-ra-chuc-nang" name="Sơ đồ Phân rã Chức năng">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Gốc hệ thống -->
+        <mxCell id="root_app" value="&lt;b&gt;HỆ THỐNG ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ&lt;/b&gt;&lt;br&gt;(Đề tài 43 - AJP201)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006eaf;fontColor=#ffffff;fontSize=14;fontStyle=1;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="400" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- 4 Nhánh phân cấp chính -->
+        <!-- Nhóm 1 -->
+        <mxCell id="group_data" value="&lt;b&gt;1. Mô hình &amp;amp; Lưu trữ Dữ liệu&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="300" height="45" as="geometry" />
+        </mxCell>
+        <!-- Nhóm 2 -->
+        <mxCell id="group_core" value="&lt;b&gt;2. Nghiệp vụ Điểm danh &amp;amp; Đồng thời&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="150" width="340" height="45" as="geometry" />
+        </mxCell>
+        <!-- Nhóm 3 -->
+        <mxCell id="group_net" value="&lt;b&gt;3. Hạ tầng Mạng TCP Client-Server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="150" width="330" height="45" as="geometry" />
+        </mxCell>
+        <!-- Nhóm 4 -->
+        <mxCell id="group_stat" value="&lt;b&gt;4. Thống kê, Báo cáo &amp;amp; Điều khiển&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="150" width="320" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Đường nối từ Gốc xuống 4 nhóm -->
+        <mxCell id="edge_r_g1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#006eaf;" edge="1" parent="1" source="root_app" target="group_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_g2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#006eaf;" edge="1" parent="1" source="root_app" target="group_core">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_g3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#006eaf;" edge="1" parent="1" source="root_app" target="group_net">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_r_g4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#006eaf;" edge="1" parent="1" source="root_app" target="group_stat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lá của Nhóm 1: Mô hình & Lưu trữ -->
+        <mxCell id="leaf_f01" value="&lt;b&gt;F01: Mô hình Dữ liệu &amp;amp; Ngoại lệ&lt;/b&gt;&lt;br&gt;[Phần lõi] record SinhVien, Phien, Luot;&lt;br&gt;enum TrangThai; sealed KetQua" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f02" value="&lt;b&gt;F02: Đọc Danh sách Lớp từ CSV&lt;/b&gt;&lt;br&gt;[Phần lõi] Nạp sinh viên vào Map/Set,&lt;br&gt;kiểm tra định dạng, chuẩn hóa UTF-8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f11" value="&lt;b&gt;F11: Xuất Kết quả Buổi ra CSV&lt;/b&gt;&lt;br&gt;[Phải làm] Ghi danh sách có mặt/vắng,&lt;br&gt;dấu thời gian điểm danh ra file CSV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="400" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_g1_f01" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;" edge="1" parent="1" source="group_data" target="leaf_f01"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g1_f02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;" edge="1" parent="1" source="group_data" target="leaf_f02"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g1_f11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;" edge="1" parent="1" source="group_data" target="leaf_f11"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lá của Nhóm 2: Nghiệp vụ Điểm danh & Đồng thời -->
+        <mxCell id="leaf_f03" value="&lt;b&gt;F03: Quản lý Vòng đời Phiên&lt;/b&gt;&lt;br&gt;[Phần lõi] Mở phiên có thời hạn, đóng thủ công,&lt;br&gt;trạng thái an toàn luồng với volatile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="440" y="240" width="340" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f04" value="&lt;b&gt;F04: Tự đóng Phiên bằng Hẹn giờ&lt;/b&gt;&lt;br&gt;[Phần lõi] ScheduledExecutorService tự ngắt&lt;br&gt;phiên sau khoảng thời gian đặt trước" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="440" y="320" width="340" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f05" value="&lt;b&gt;F05: Ghi nhận &amp;amp; Chống trùng Mã SV&lt;/b&gt;&lt;br&gt;[Phần lõi] Xử lý đồng thời đa client,&lt;br&gt;chống trùng bằng ConcurrentHashMap &amp;amp; Set" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="440" y="400" width="340" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f14" value="&lt;b&gt;F14: Chống Gửi hộ qua IP (1 IP - 1 Mã)&lt;/b&gt;&lt;br&gt;[Mở rộng] Khóa địa chỉ IP đã gửi,&lt;br&gt;ngăn chặn 1 máy gửi hộ nhiều sinh viên" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="440" y="480" width="340" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_g2_f03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="group_core" target="leaf_f03"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g2_f04" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="group_core" target="leaf_f04"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g2_f05" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="group_core" target="leaf_f05"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g2_f14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="group_core" target="leaf_f14"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lá của Nhóm 3: Mạng TCP -->
+        <mxCell id="leaf_f06" value="&lt;b&gt;F06: Giao thức Trao đổi Mạng&lt;/b&gt;&lt;br&gt;[Phần lõi] Bộ lệnh văn bản (DIEM_DANH, MO_PHIEN),&lt;br&gt;phân tích lệnh bằng switch expression" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="840" y="240" width="330" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f07" value="&lt;b&gt;F07: Máy chủ TCP Đa luồng (Server)&lt;/b&gt;&lt;br&gt;[Phần lõi] ServerSocket lắng nghe, bể luồng&lt;br&gt;ExecutorService phục vụ đồng thời nhiều client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="840" y="320" width="330" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f08" value="&lt;b&gt;F08: Máy khách TCP Sinh viên (Client)&lt;/b&gt;&lt;br&gt;[Phần lõi] Kết nối Socket tới Server,&lt;br&gt;gửi mã SV &amp;amp; mã phiên, nhận phản hồi" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="840" y="400" width="330" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_g3_f06" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;" edge="1" parent="1" source="group_net" target="leaf_f06"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g3_f07" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;" edge="1" parent="1" source="group_net" target="leaf_f07"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g3_f08" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;" edge="1" parent="1" source="group_net" target="leaf_f08"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Lá của Nhóm 4: Thống kê & Điều khiển -->
+        <mxCell id="leaf_f09" value="&lt;b&gt;F09: Lọc Danh sách Vắng bằng Streams&lt;/b&gt;&lt;br&gt;[Phải làm] Đối chiếu danh sách lớp với Set có mặt,&lt;br&gt;sắp xếp và xuất danh sách sinh viên vắng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="240" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f10" value="&lt;b&gt;F10: Thống kê Chuyên cần Buổi học&lt;/b&gt;&lt;br&gt;[Phải làm] Đếm sĩ số, tính % có mặt và vắng,&lt;br&gt;in tổng hợp ra màn hình máy chủ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="320" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f12" value="&lt;b&gt;F12: Giao diện Console Giảng viên&lt;/b&gt;&lt;br&gt;[Phải làm] Menu tương tác mở/đóng phiên,&lt;br&gt;theo dõi trực tiếp số lượng điểm danh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="400" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f13" value="&lt;b&gt;F13: Đóng gói Thực thi JAR&lt;/b&gt;&lt;br&gt;[Phải làm] Đóng gói Server và Client thành&lt;br&gt;file JAR độc lập kèm script chạy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="480" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf_f15" value="&lt;b&gt;F15: Thống kê Cả kỳ &amp;amp; Cảnh báo &amp;lt;80%&lt;/b&gt;&lt;br&gt;[Mở rộng] Tổng hợp lịch sử nhiều buổi,&lt;br&gt;groupingBy đếm vắng, cảnh báo cấm thi" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="560" width="320" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_g4_f09" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="group_stat" target="leaf_f09"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g4_f10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="group_stat" target="leaf_f10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g4_f12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="group_stat" target="leaf_f12"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g4_f13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="group_stat" target="leaf_f13"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_g4_f15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="group_stat" target="leaf_f15"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+

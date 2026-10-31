@@ -1,0 +1,247 @@
+<mxfile host="Electron" modified="2026-10-31T00:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="so-do-tuan-tu" name="Sơ đồ Tuần tự">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Tiêu đề -->
+        <mxCell id="title_seq" value="&lt;b&gt;SƠ ĐỒ TUẦN TỰ (SEQUENCE DIAGRAM): LUỒNG ĐIỂM DANH QUA MẠNG &amp;amp; HẸN GIỜ ĐÓNG PHIÊN&lt;/b&gt;&lt;br&gt;Thể hiện sự phối hợp giữa Giảng viên, Sinh viên, Máy chủ TCP đa luồng, Service nghiệp vụ và Bộ lập lịch hẹn giờ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#343a40;fontColor=#212529;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="20" width="1050" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Lifelines (Các đối tượng tham gia) -->
+        <!-- Giảng viên -->
+        <mxCell id="ll_gv" value="Giảng viên&lt;br&gt;(Teacher)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="90" width="110" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- TeacherConsoleUI -->
+        <mxCell id="ll_ui" value="TeacherConsoleUI&lt;br&gt;(Giao diện GV)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="90" width="130" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- Sinh viên / Client -->
+        <mxCell id="ll_sv" value="StudentClient&lt;br&gt;(Máy khách SV)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="90" width="120" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- ClientHandler -->
+        <mxCell id="ll_handler" value="ClientHandler&lt;br&gt;(Luồng Worker TCP)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="90" width="130" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- DiemDanhService -->
+        <mxCell id="ll_service" value="DiemDanhService&lt;br&gt;(Nghiệp vụ lõi)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="90" width="130" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- PhienManager -->
+        <mxCell id="ll_phien" value="PhienManager&lt;br&gt;(Quản lý Phiên)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="950" y="90" width="120" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- Scheduler -->
+        <mxCell id="ll_sched" value="ScheduledExecutor&lt;br&gt;(Bộ hẹn giờ Ch4)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="90" width="140" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- CsvStorageService -->
+        <mxCell id="ll_storage" value="CsvStorageService&lt;br&gt;(Lưu trữ CSV)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="90" width="130" height="880" as="geometry" />
+        </mxCell>
+
+        <!-- PHA 1: MỞ PHIÊN ĐIỂM DANH -->
+        <mxCell id="note_p1" value="&lt;b&gt;Pha 1: Giảng viên mở phiên điểm danh&lt;/b&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="220" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_1" value="1: Chọn mở phiên (Mã: P01, 15 phút)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#00529B;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135" y="210" as="sourcePoint" />
+            <mxPoint x="305" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_2" value="2: moPhien(&quot;P01&quot;, 15)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#00529B;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="230" as="sourcePoint" />
+            <mxPoint x="835" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_3" value="3: moPhien(&quot;P01&quot;, 15, onTimeout)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="250" as="sourcePoint" />
+            <mxPoint x="1010" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_4" value="4: schedule(task, 15, MINUTES)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#4c1130;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="270" as="sourcePoint" />
+            <mxPoint x="1180" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_5" value="5: ScheduledFuture" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#4c1130;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1180" y="290" as="sourcePoint" />
+            <mxPoint x="1010" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_6" value="6: KetQua.ThanhCong(&quot;Mở phiên P01 thành công&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#274e13;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="310" as="sourcePoint" />
+            <mxPoint x="305" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PHA 2: SINH VIÊN GỬI ĐIỂM DANH -->
+        <mxCell id="note_p2" value="&lt;b&gt;Pha 2: Sinh viên kết nối TCP gửi điểm danh&lt;/b&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffe6cc;strokeColor=#d79b00;size=10;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="250" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_7" value="7: Kết nối TCP Socket (IP_Server, Port)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="390" as="sourcePoint" />
+            <mxPoint x="655" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_8" value="8: Gửi lệnh: DIEM_DANH P01 22CNTT01" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#b85450;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="420" as="sourcePoint" />
+            <mxPoint x="655" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_9" value="9: ghiNhanDiemDanh(&quot;P01&quot;, &quot;22CNTT01&quot;, ipClient)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="450" as="sourcePoint" />
+            <mxPoint x="835" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Xử lý nghiệp vụ bên trong DiemDanhService -->
+        <mxCell id="msg_10" value="10: isConMo(&quot;P01&quot;)?" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="480" as="sourcePoint" />
+            <mxPoint x="1010" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_11" value="11: true (Đang mở)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#274e13;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="500" as="sourcePoint" />
+            <mxPoint x="835" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_12" value="12: [Chống gian lận] Check IP &amp;amp; Set.add(maSV)" style="html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="530" as="sourcePoint" />
+            <mxPoint x="845" y="550" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="870" y="530" />
+              <mxPoint x="870" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_13" value="13: KetQua.ThanhCong(&quot;Điểm danh thành công: Nguyễn Văn A&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#274e13;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="580" as="sourcePoint" />
+            <mxPoint x="655" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_14" value="14: Trả gói tin: SUCCESS Điểm danh thành công" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#b85450;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="600" as="sourcePoint" />
+            <mxPoint x="480" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PHA 3: HẾT HẠN PHIÊN -->
+        <mxCell id="note_p3" value="&lt;b&gt;Pha 3: Luồng hẹn giờ tự động đóng phiên khi hết hạn&lt;/b&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#e1d5e7;strokeColor=#9673a6;size=10;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="630" width="310" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_15" value="15: Timer hết hạn (15 phút) -&amp;gt; onTimeout.run()" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#4c1130;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1180" y="680" as="sourcePoint" />
+            <mxPoint x="1010" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_16" value="16: dongPhien() -&amp;gt; Chuyển DA_DONG" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="700" as="sourcePoint" />
+            <mxPoint x="835" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_17" value="17: Thông báo console: &quot;Phiên P01 đã tự động đóng&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#00529B;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="720" as="sourcePoint" />
+            <mxPoint x="305" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PHA 4: THỐNG KÊ & XUẤT CSV -->
+        <mxCell id="note_p4" value="&lt;b&gt;Pha 4: Tổng hợp danh sách vắng bằng Streams &amp;amp; Xuất CSV&lt;/b&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#d5e8d4;strokeColor=#82b366;size=10;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="750" width="330" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_18" value="18: Chọn xuất báo cáo buổi" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#00529B;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135" y="800" as="sourcePoint" />
+            <mxPoint x="305" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_19" value="19: xuatBaoCaoBuoi(&quot;buoi-1.csv&quot;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#00529B;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="820" as="sourcePoint" />
+            <mxPoint x="835" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_20" value="20: Streams: filter(!setCoMat.contains).collect(toList)" style="html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#274e13;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="845" as="sourcePoint" />
+            <mxPoint x="845" y="865" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="870" y="845" />
+              <mxPoint x="870" y="865" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_21" value="21: xuatKetQuaBuoi(path, phien, dsLop, setCoMat)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#4c1130;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="890" as="sourcePoint" />
+            <mxPoint x="1365" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_22" value="22: File CSV đã ghi thành công" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#4c1130;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1365" y="910" as="sourcePoint" />
+            <mxPoint x="835" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_23" value="23: Hiển thị thống kê buổi: Sĩ số 40, Có mặt 38 (95%), Vắng 2 (5%)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endFill=0;strokeColor=#00529B;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="930" as="sourcePoint" />
+            <mxPoint x="135" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
