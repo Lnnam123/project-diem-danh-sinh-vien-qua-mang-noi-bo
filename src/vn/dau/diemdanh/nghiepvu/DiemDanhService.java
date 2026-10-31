@@ -1,5 +1,6 @@
 package vn.dau.diemdanh.nghiepvu;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -35,44 +36,114 @@ public class DiemDanhService {
         this.thongKeService = thongKeService;
     }
 
+    /**
+     * F02: Nạp danh sách sinh viên lớp học vào bộ nhớ.
+     */
     public void napDanhSachLop(Map<String, SinhVien> danhSach) {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        mapSinhVien.clear();
+        if (danhSach != null) {
+            mapSinhVien.putAll(danhSach);
+        }
+        setMaSVCoMat.clear();
+        danhSachLuotDiemDanh.clear();
+        chongGianLanService.reset();
     }
 
+    /**
+     * F03, F04: Mở phiên điểm danh mới.
+     */
     public KetQua moPhien(String maPhien, int thoiLuongPhut) {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        setMaSVCoMat.clear();
+        danhSachLuotDiemDanh.clear();
+        chongGianLanService.reset();
+        return phienManager.moPhien(maPhien, thoiLuongPhut, null);
     }
 
+    /**
+     * F03: Đóng phiên điểm danh thủ công.
+     */
     public KetQua dongPhien() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return phienManager.dongPhien();
     }
 
+    /**
+     * F05, F14: Tiếp nhận điểm danh, chống trùng mã sinh viên và chống gian lận IP.
+     */
     public KetQua ghiNhanDiemDanh(String maPhien, String maSV, String ipAddress) {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        // 1. Kiểm tra trạng thái phiên
+        if (!phienManager.isConMo()) {
+            return new KetQua.ThatBai("Phiên điểm danh hiện không mở hoặc đã hết hạn", "PHIEN_KHONG_MO");
+        }
+
+        Optional<PhienDiemDanh> optPhien = phienManager.getPhienHienTai();
+        if (optPhien.isEmpty() || !optPhien.get().maPhien().equalsIgnoreCase(maPhien != null ? maPhien.strip() : "")) {
+            return new KetQua.ThatBai("Mã phiên không khớp với phiên hiện tại", "SAI_MA_PHIEN");
+        }
+        PhienDiemDanh phien = optPhien.get();
+
+        // 2. Kiểm tra mã sinh viên
+        if (maSV == null || maSV.strip().isEmpty()) {
+            return new KetQua.ThatBai("Mã sinh viên không được để trống", "MA_SV_RONG");
+        }
+        String cleanMaSV = maSV.strip();
+
+        SinhVien sv = mapSinhVien.get(cleanMaSV);
+        if (sv == null) {
+            return new KetQua.ThatBai("Sinh viên không tồn tại trong danh sách lớp: " + cleanMaSV, "SV_KHONG_TON_TAI");
+        }
+
+        // 3. Chống trùng lặp mã sinh viên (Concurrent Set)
+        if (setMaSVCoMat.contains(cleanMaSV)) {
+            return new KetQua.ThatBai("Sinh viên " + cleanMaSV + " đã điểm danh trước đó", "DA_DIEM_DANH");
+        }
+
+        // 4. Kiểm tra chống gian lận IP (F14)
+        KetQua checkIP = chongGianLanService.kiemTraVaGhiNhanIP(ipAddress, cleanMaSV);
+        if (!checkIP.isThanhCong()) {
+            return checkIP;
+        }
+
+        // 5. Ghi nhận có mặt đồng thời an toàn luồng
+        boolean added = setMaSVCoMat.add(cleanMaSV);
+        if (!added) {
+            return new KetQua.ThatBai("Sinh viên " + cleanMaSV + " đã điểm danh trước đó", "DA_DIEM_DANH");
+        }
+
+        LuotDiemDanh luot = new LuotDiemDanh(
+                cleanMaSV,
+                phien.maPhien(),
+                LocalDateTime.now(),
+                ipAddress != null ? ipAddress.strip() : "127.0.0.1"
+        );
+        danhSachLuotDiemDanh.add(luot);
+
+        return new KetQua.ThanhCong("Điểm danh thành công cho sinh viên: " + sv.hoTen(), luot);
     }
 
+    /**
+     * F09: Lọc danh sách sinh viên vắng mặt bằng Streams API.
+     */
     public List<SinhVien> layDanhSachVang() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return thongKeService.locDanhSachVang(mapSinhVien.values(), setMaSVCoMat);
     }
 
     public int laySoLuongCoMat() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return setMaSVCoMat.size();
     }
 
     public int layTongSoLop() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return mapSinhVien.size();
     }
 
     public Optional<PhienDiemDanh> getPhienHienTai() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return phienManager.getPhienHienTai();
     }
 
     public Collection<SinhVien> getDanhSachSinhVienLop() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return mapSinhVien.values();
     }
 
     public Set<String> getSetMaSVCoMat() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return setMaSVCoMat;
     }
 }
-
