@@ -28,7 +28,7 @@ Write-Log ('Thời gian kiểm thử: ' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss
 Write-Log 'Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone'
 Write-Log '================================================================================'
 
-# 1. Xoá bin/ cũ và tạo lại
+# 1. Xoá bin cũ
 Write-Log '[1/3] Xoá thư mục bin/ cũ và khởi tạo lại...'
 $BinDir = Join-Path $ProjectRoot 'bin'
 if (Test-Path $BinDir) {
@@ -36,7 +36,7 @@ if (Test-Path $BinDir) {
 }
 New-Item -ItemType Directory -Path $BinDir -Force | Out-Null
 
-# 2. Quét và biên dịch lại toàn bộ src/ và test/
+# 2. Quét và biên dịch
 Write-Log '[2/3] Quét và biên dịch toàn bộ src/ và test/ bằng javac (Java 21, UTF-8)...'
 $SourcesFile = Join-Path $ProjectRoot 'sources.txt'
 $JavaFiles = Get-ChildItem -Path (Join-Path $ProjectRoot 'src'), (Join-Path $ProjectRoot 'test') -Recurse -Filter *.java -ErrorAction SilentlyContinue
@@ -87,7 +87,7 @@ if ($CompileProcess.ExitCode -ne 0) {
 
 Write-Log ('Biên dịch thành công ' + $JavaFiles.Count + ' tệp Java!')
 
-# 3. Tìm thư viện JUnit Platform Console Standalone trong lib/
+# 3. Tìm thư viện JUnit
 $JunitJars = Get-ChildItem -Path (Join-Path $ProjectRoot 'lib') -Filter 'junit-platform-console-standalone-*.jar'
 if ($null -eq $JunitJars -or $JunitJars.Count -eq 0) {
     Write-Log '[LỖI] Không tìm thấy thư viện junit-platform-console-standalone trong lib/!'
@@ -139,7 +139,7 @@ for ($i = 1; $i -le $Times; $i++) {
     }
 }
 
-# 5. Tổng kết kết quả
+# 5. Tổng kết
 Write-Log ''
 Write-Log '================================================================================'
 if (-not $CoLoi) {
@@ -157,5 +157,3 @@ if (-not $CoLoi) {
     $OutputLines | Out-File -FilePath $LogFile -Encoding utf8
     exit 1
 }
-
-

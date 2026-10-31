@@ -1,6 +1,7 @@
 package vn.dau.diemdanh.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Phục vụ chức năng F01, F03: Thông tin phiên điểm danh.
@@ -13,12 +14,24 @@ public record PhienDiemDanh(
         TrangThaiPhien trangThai
 ) {
 
+    public PhienDiemDanh {
+        Objects.requireNonNull(maPhien, "maPhien không được null");
+        Objects.requireNonNull(thoiGianMo, "thoiGianMo không được null");
+        Objects.requireNonNull(trangThai, "trangThai không được null");
+        maPhien = maPhien.strip();
+        if (maPhien.isEmpty()) {
+            throw new IllegalArgumentException("maPhien không được để trống");
+        }
+        if (thoiLuongPhut <= 0) {
+            throw new IllegalArgumentException("thoiLuongPhut phải lớn hơn 0");
+        }
+    }
+
     public boolean isConHieuLuc() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return trangThai == TrangThaiPhien.DANG_MO && LocalDateTime.now().isBefore(thoiGianKetThuc());
     }
 
     public LocalDateTime thoiGianKetThuc() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+        return thoiGianMo.plusMinutes(thoiLuongPhut);
     }
 }
-

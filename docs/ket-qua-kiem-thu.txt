@@ -1,11 +1,11 @@
 ﻿================================================================================
 KIỂM THỬ TỰ ĐỘNG - ĐỀ TÀI 43: ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ
-Thời gian kiểm thử: 2026-10-31 21:23:09
+Thời gian kiểm thử: 2026-10-31 21:30:02
 Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone
 ================================================================================
 [1/3] Xoá thư mục bin/ cũ và khởi tạo lại...
 [2/3] Quét và biên dịch toàn bộ src/ và test/ bằng javac (Java 21, UTF-8)...
-Biên dịch thành công 26 tệp Java!
+Biên dịch thành công 28 tệp Java!
 [3/3] Thực thi kiểm thử JUnit 5 (Số lần lặp: 1)...
 
 --------------------------------------------------------------------------------
@@ -13,25 +13,37 @@ Biên dịch thành công 26 tệp Java!
 --------------------------------------------------------------------------------
 ?
 ?? JUnit Jupiter ?
+?  ?? Ki?m th? mô hình PhienDiemDanh (F01) ?
+?  ?  ?? Phiên ?ã ?óng thì isConHieuLuc là false ?
+?  ?  ?? Ném ngo?i l? khi th?i l??ng phiên <= 0 ?
+?  ?  ?? Ném ngo?i l? khi thông tin b?t bu?c b? null ho?c r?ng ?
+?  ?  ?? Phiên quá th?i l??ng thì isConHieuLuc là false ?
+?  ?  ?? Kh?i t?o phiên ?i?m danh h?p l? thành công ?
+?  ?  ?? Tính toán th?i gian k?t thúc chính xác theo th?i l??ng phút ?
+?  ?  ?? Phiên ?ang m? và còn trong th?i h?n thì isConHieuLuc là true ?
 ?  ?? Ki?m th? th?c th? SinhVien ?
-?     ?? Hai sinh viên cùng thông tin có equals và hashCode b?ng nhau (record equality) ?
-?     ?? Kh?i t?o sinh viên h?p l? thành công ?
-?     ?? Ném NullPointerException khi có tr??ng thông tin b? null ?
-?     ?? Chu?i tr?ng th?a ? hai ??u ???c c?t g?n t? ??ng (strip) ?
+?  ?  ?? Hai sinh viên cùng thông tin có equals và hashCode b?ng nhau (record equality) ?
+?  ?  ?? Kh?i t?o sinh viên h?p l? thành công ?
+?  ?  ?? Ném NullPointerException khi có tr??ng thông tin b? null ?
+?  ?  ?? Chu?i tr?ng th?a ? hai ??u ???c c?t g?n t? ??ng (strip) ?
+?  ?? Ki?m th? mô hình LuotDiemDanh (F01) ?
+?     ?? Hai l??t ?i?m danh cùng thông tin có equals và hashCode b?ng nhau ?
+?     ?? Kh?i t?o l??t ?i?m danh h?p l? và c?t kho?ng tr?ng th?a ?
+?     ?? Ném ngo?i l? khi có tr??ng thông tin b? null ho?c r?ng ?
 ?? JUnit Vintage ?
 ?? JUnit Platform Suite ?
-Test run finished after 97 ms
-[         4 containers found      ]
+Test run finished after 115 ms
+[         6 containers found      ]
 [         0 containers skipped    ]
-[         4 containers started    ]
+[         6 containers started    ]
 [         0 containers aborted    ]
-[         4 containers successful ]
+[         6 containers successful ]
 [         0 containers failed     ]
-[         4 tests found           ]
+[        14 tests found           ]
 [         0 tests skipped         ]
-[         4 tests started         ]
+[        14 tests started         ]
 [         0 tests aborted         ]
-[         4 tests successful      ]
+[        14 tests successful      ]
 [         0 tests failed          ]
 => Kết quả lần 1: ĐẠT
 
