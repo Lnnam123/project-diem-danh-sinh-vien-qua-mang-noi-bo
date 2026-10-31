@@ -2,6 +2,10 @@
 bin/
 *.class
 
+# Build JAR artifacts (keep dependencies in lib/)
+*.jar
+!lib/*.jar
+
 # Temporary build artifacts
 sources.txt
 test-sources.txt

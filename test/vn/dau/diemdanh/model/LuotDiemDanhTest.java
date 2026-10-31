@@ -53,3 +53,4 @@ class LuotDiemDanhTest {
         assertNotEquals(luot1, luot3);
     }
 }
+

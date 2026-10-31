@@ -58,7 +58,7 @@ class NetworkIntegrationTest {
     void diemDanhThanhCongQuaMang() {
         diemDanhService.moPhien("P01", 15);
 
-        String response = StudentClient.guiDiemDanh("localhost", port, "P01", "SV01");
+        String response = StudentClient.guiDiemDanh("127.0.0.1", port, "P01", "SV01");
 
         assertNotNull(response);
         assertTrue(response.startsWith("SUCCESS:"), "Phản hồi phải bắt đầu bằng SUCCESS:");
@@ -68,7 +68,7 @@ class NetworkIntegrationTest {
     @Test
     @DisplayName("F07 & F08: Máy khách nhận thông báo lỗi khi phiên chưa mở")
     void diemDanhLoiKhiPhienChuaMo() {
-        String response = StudentClient.guiDiemDanh("localhost", port, "P01", "SV01");
+        String response = StudentClient.guiDiemDanh("127.0.0.1", port, "P01", "SV01");
 
         assertNotNull(response);
         assertTrue(response.startsWith("ERROR:"), "Phản hồi phải bắt đầu bằng ERROR:");
