@@ -1,11 +1,11 @@
 ﻿================================================================================
 KIỂM THỬ TỰ ĐỘNG - ĐỀ TÀI 43: ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ
-Thời gian kiểm thử: 2026-10-31 21:39:51
+Thời gian kiểm thử: 2026-10-31 21:41:44
 Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone
 ================================================================================
 [1/3] Xoá thư mục bin/ cũ và khởi tạo lại...
 [2/3] Quét và biên dịch toàn bộ src/ và test/ bằng javac (Java 21, UTF-8)...
-Biên dịch thành công 32 tệp Java!
+Biên dịch thành công 33 tệp Java!
 [3/3] Thực thi kiểm thử JUnit 5 (Số lần lặp: 1)...
 
 --------------------------------------------------------------------------------
@@ -29,6 +29,14 @@ Biên dịch thành công 32 tệp Java!
 ?  ?  ?? Kh?i t?o phiên ?i?m danh h?p l? thành công ?
 ?  ?  ?? Tính toán th?i gian k?t thúc chính xác theo th?i l??ng phút ?
 ?  ?  ?? Phiên ?ang m? và còn trong th?i h?n thì isConHieuLuc là true ?
+?  ?? Ki?m th? Giao th?c M?ng V?n b?n - Ch?c n?ng F06 ?
+?  ?  ?? T? ??ng c?t kho?ng tr?ng th?a gi?a các tham s? ?
+?  ?  ?? Ném GiaoThucException khi l?nh DIEMDANH thi?u tham s? b?t bu?c ?
+?  ?  ?? Phân tích l?nh không tham s? nh? PING ho?c STATUS ?
+?  ?  ?? ??nh d?ng thông ?i?p ph?n h?i chu?n giao th?c m?ng ?
+?  ?  ?? Ném GiaoThucException khi l?nh r?ng ho?c toàn kho?ng tr?ng ?
+?  ?  ?? Ném GiaoThucException khi l?nh không ???c h? tr? ?
+?  ?  ?? Phân tích thành công l?nh DIEMDANH v?i ??y ?? tham s? ?
 ?  ?? Ki?m th? th?c th? SinhVien ?
 ?  ?  ?? Hai sinh viên cùng thông tin có equals và hashCode b?ng nhau (record equality) ?
 ?  ?  ?? Kh?i t?o sinh viên h?p l? thành công ?
@@ -62,18 +70,18 @@ Biên dịch thành công 32 tệp Java!
 ?     ?? F04: Gi?ng viên ?óng phiên th? công tr??c gi? thì h?y h?n gi? thành công ?
 ?? JUnit Vintage ?
 ?? JUnit Platform Suite ?
-Test run finished after 3767 ms
-[        10 containers found      ]
+Test run finished after 3742 ms
+[        11 containers found      ]
 [         0 containers skipped    ]
-[        10 containers started    ]
+[        11 containers started    ]
 [         0 containers aborted    ]
-[        10 containers successful ]
+[        11 containers successful ]
 [         0 containers failed     ]
-[        40 tests found           ]
+[        47 tests found           ]
 [         0 tests skipped         ]
-[        40 tests started         ]
+[        47 tests started         ]
 [         0 tests aborted         ]
-[        40 tests successful      ]
+[        47 tests successful      ]
 [         0 tests failed          ]
 => Kết quả lần 1: ĐẠT
 
