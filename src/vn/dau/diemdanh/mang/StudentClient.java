@@ -8,9 +8,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+import java.util.Scanner;
+
 /**
  * Phục vụ chức năng F08: Ứng dụng dòng lệnh phía sinh viên kết nối gửi điểm danh tới máy chủ qua Socket TCP.
- * Áp dụng kỹ thuật: Socket, BufferedReader, PrintWriter (Ch5), try-with-resources (Ch6).
+ * Áp dụng kỹ thuật: Socket, BufferedReader, PrintWriter (Ch5), Scanner (Ch1), try-with-resources (Ch6).
  */
 public class StudentClient {
 
@@ -54,25 +56,84 @@ public class StudentClient {
         } catch (Exception ignored) {
         }
 
-        if (args.length < 4) {
-            System.out.println("CÚ PHÁP: java vn.dau.diemdanh.mang.StudentClient <IP_Server> <Port> <Mã_Phiên> <Mã_SV>");
-            System.out.println("VÍ DỤ:  java vn.dau.diemdanh.mang.StudentClient localhost 8888 P01 22CNTT01");
+        // Chế độ 1: Nhận tham số trực tiếp từ dòng lệnh
+        if (args.length >= 4) {
+            String host = args[0];
+            int port;
+            try {
+                port = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                System.err.println("❌ LỖI: Port phải là số nguyên hợp lệ.");
+                return;
+            }
+            String maPhien = args[2];
+            String maSV = args[3];
+
+            System.out.printf("📡 Đang gửi điểm danh tới %s:%d (Phiên: %s, Mã SV: %s)...%n", host, port, maPhien, maSV);
+            String response = guiDiemDanh(host, port, maPhien, maSV);
+            System.out.println("Kết quả: " + response);
             return;
         }
 
-        String host = args[0];
-        int port;
-        try {
-            port = Integer.parseInt(args[1]);
-        } catch (NumberFormatException e) {
-            System.err.println("LỖI: Port phải là số nguyên hợp lệ.");
-            return;
-        }
-        String maPhien = args[2];
-        String maSV = args[3];
+        // Chế độ 2: Giao diện tương tác Console thân thiện khi không truyền đủ tham số
+        System.out.println("====================================================================");
+        System.out.println("   ỨNG DỤNG ĐIỂM DANH SINH VIÊN QUA MẠNG NỘI BỘ (STUDENT CLIENT)    ");
+        System.out.println("====================================================================");
 
-        System.out.printf("Đang gửi điểm danh tới %s:%d (Phiên: %s, Mã SV: %s)...%n", host, port, maPhien, maSV);
-        String response = guiDiemDanh(host, port, maPhien, maSV);
-        System.out.println("KẾT QUẢ: " + response);
+        try (Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
+            System.out.print("🌐 Nhập IP Máy chủ [Enter để lấy mặc định 127.0.0.1]: ");
+            String hostInput = scanner.nextLine().strip();
+            String host = hostInput.isEmpty() ? "127.0.0.1" : hostInput;
+
+            System.out.print("🔌 Nhập Cổng kết nối [Enter để lấy mặc định 8888]: ");
+            String portInput = scanner.nextLine().strip();
+            int port = 8888;
+            if (!portInput.isEmpty()) {
+                try {
+                    port = Integer.parseInt(portInput);
+                } catch (NumberFormatException e) {
+                    System.out.println("⚠️ Cổng không hợp lệ, tự động dùng cổng mặc định 8888.");
+                    port = 8888;
+                }
+            }
+
+            while (true) {
+                System.out.println("--------------------------------------------------------------------");
+                System.out.print("🔑 Nhập Mã phiên điểm danh (ví dụ P01, hoặc 'exit' để thoát): ");
+                String maPhien = scanner.nextLine().strip();
+                if (maPhien.equalsIgnoreCase("exit") || maPhien.equalsIgnoreCase("0")) {
+                    break;
+                }
+                if (maPhien.isEmpty()) {
+                    System.out.println("⚠️ Mã phiên không được để trống!");
+                    continue;
+                }
+
+                System.out.print("🎓 Nhập Mã sinh viên (ví dụ 22CNTT01): ");
+                String maSV = scanner.nextLine().strip();
+                if (maSV.isEmpty()) {
+                    System.out.println("⚠️ Mã sinh viên không được để trống!");
+                    continue;
+                }
+
+                System.out.printf("📡 Đang gửi tới máy chủ %s:%d...%n", host, port);
+                String response = guiDiemDanh(host, port, maPhien, maSV);
+
+                if (response.startsWith("SUCCESS:")) {
+                    System.out.println("✅ THÀNH CÔNG: " + response.substring("SUCCESS:".length()).trim());
+                } else if (response.startsWith("ERROR:")) {
+                    System.out.println("❌ THẤT BẠI: " + response.substring("ERROR:".length()).trim());
+                } else {
+                    System.out.println("ℹ️ PHẢN HỒI: " + response);
+                }
+
+                System.out.print("\n👉 Bạn có muốn gửi tiếp lượt điểm danh khác? [Enter: Tiếp tục / Gõ 0: Thoát]: ");
+                String tiep = scanner.nextLine().strip();
+                if (tiep.equalsIgnoreCase("0") || tiep.equalsIgnoreCase("k") || tiep.equalsIgnoreCase("n")) {
+                    break;
+                }
+            }
+        }
+        System.out.println("👋 Tạm biệt!");
     }
 }
