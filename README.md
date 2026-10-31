@@ -20,6 +20,7 @@ project-Điểm danh lớp học qua mạng nội bộ/
 │   └── ket-qua/                        # Thư mục lưu kết quả điểm danh từng buổi
 ├── docs/
 │   ├── danh-sach-chuc-nang.md          # Đặc tả 15 chức năng chi tiết và kỹ thuật Java
+│   ├── ket-qua-kiem-thu.txt            # Nhật ký kết quả kiểm thử tự động (dán báo cáo)
 │   └── so-do/                          # 5 sơ đồ hệ thống (.drawio và .drawio.png)
 │       ├── so-do-phan-ra-chuc-nang.drawio.png
 │       ├── so-do-kien-truc-cac-tang.drawio.png
@@ -28,6 +29,8 @@ project-Điểm danh lớp học qua mạng nội bộ/
 │       └── luu-do-quy-trinh-phan-loi.drawio.png
 ├── lib/                                # Thư viện bên ngoài (chỉ dùng JUnit 5)
 │   └── junit-platform-console-standalone-1.10.2.jar
+├── scripts/                            # Các kịch bản phụ trợ tự động hoá
+│   └── kiemthu.ps1                     # Script kiểm thử và ghi log UTF-8
 ├── src/
 │   └── vn/
 │       └── dau/
@@ -70,6 +73,7 @@ project-Điểm danh lớp học qua mạng nội bộ/
 │           └── diemdanh/
 │               └── model/
 │                   └── SinhVienTest.java
+├── kiemthu.bat                         # Lệnh kiểm thử toàn bộ dự án bằng 1 dòng lệnh
 ├── CLAUDE.md                           # Bộ nguyên tắc và quy chuẩn dự án cho AI
 ├── README.md                           # Tài liệu hướng dẫn dự án
 └── 2.plan-trien-khai-project.md        # Kế hoạch chi tiết 6 bước triển khai
@@ -112,34 +116,36 @@ java -cp bin vn.dau.diemdanh.mang.StudentClient localhost 8888 P01 22CNTT01
 
 ## 4. Kiểm thử tự động với JUnit 5
 
-### 4.1. Biên dịch mã kiểm thử
-Biên dịch các tệp kiểm thử trong thư mục `test/` với classpath gồm `bin/` và thư viện JUnit 5 standalone trong `lib/`:
+### 4.1. Chạy toàn bộ kiểm thử bằng một lệnh duy nhất (`kiemthu.bat`)
+Tại thư mục gốc dự án, chỉ cần chạy:
+```powershell
+.\kiemthu.bat
+```
+Hoặc lặp lại 5 lần (đối với kiểm thử bền bỉ đa luồng):
+```powershell
+.\kiemthu.bat 5
+```
 
+Tệp lệnh `kiemthu.bat` sẽ tự động:
+1. Xoá sạch thư mục `bin/` cũ và khởi tạo lại.
+2. Biên dịch lại toàn bộ `src/` và `test/` bằng `javac` Java 21 UTF-8.
+3. Chạy toàn bộ các test suite JUnit 5 trong thư mục `test/`.
+4. In kết quả từng lần chạy và dòng tổng kết cuối cùng: **ĐẠT** hoặc **HỎNG** (trả mã thoát `0` nếu thành công, `1` nếu có lỗi).
+5. Tự động ghi toàn bộ nhật ký kết quả vào [`docs/ket-qua-kiem-thu.txt`](docs/ket-qua-kiem-thu.txt) để dán vào báo cáo bài tập lớn.
+
+### 4.2. Chạy thủ công từng bước (Tuỳ chọn)
+Nếu muốn tự biên dịch và thực thi từng lệnh riêng biệt:
+
+**Biên dịch mã kiểm thử:**
 ```powershell
 Get-ChildItem -Path test -Recurse -Filter *.java | ForEach-Object { Resolve-Path -Relative $_.FullName } | Out-File -FilePath test-sources.txt -Encoding ascii
 javac -encoding UTF-8 -cp "bin;lib/*" -d bin "@test-sources.txt"
 Remove-Item test-sources.txt
 ```
 
-### 4.2. Chạy toàn bộ kiểm thử
-Chạy bộ kiểm thử tự động bằng JUnit 5 Platform Console Launcher:
-
+**Thực thi kiểm thử:**
 ```powershell
 java -jar lib/junit-platform-console-standalone-1.10.2.jar execute --class-path bin --scan-class-path
-```
-
-Kết quả hiển thị trên console:
-```text
-JUnit Jupiter ✔
-  Kiểm thử thực thể SinhVien ✔
-    ✔ Khởi tạo sinh viên hợp lệ thành công
-    ✔ Chuỗi trắng thừa ở hai đầu được cắt gọn tự động (strip)
-    ✔ Ném NullPointerException khi có trường thông tin bị null
-    ✔ Hai sinh viên cùng thông tin có equals và hashCode bằng nhau (record equality)
-
-[ 4 tests found ]
-[ 4 tests successful ]
-[ 0 tests failed ]
 ```
 
 ---

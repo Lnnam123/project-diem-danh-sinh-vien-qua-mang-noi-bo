@@ -50,3 +50,4 @@ class SinhVienTest {
         assertNotEquals(sv1, sv3);
     }
 }
+

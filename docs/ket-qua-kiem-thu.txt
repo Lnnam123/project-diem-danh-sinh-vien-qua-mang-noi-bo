@@ -1,0 +1,42 @@
+﻿================================================================================
+KIỂM THỬ TỰ ĐỘNG - ĐỀ TÀI 43: ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ
+Thời gian kiểm thử: 2026-10-31 21:23:09
+Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone
+================================================================================
+[1/3] Xoá thư mục bin/ cũ và khởi tạo lại...
+[2/3] Quét và biên dịch toàn bộ src/ và test/ bằng javac (Java 21, UTF-8)...
+Biên dịch thành công 26 tệp Java!
+[3/3] Thực thi kiểm thử JUnit 5 (Số lần lặp: 1)...
+
+--------------------------------------------------------------------------------
+[LẦN CHẠY 1 / 1]
+--------------------------------------------------------------------------------
+?
+?? JUnit Jupiter ?
+?  ?? Ki?m th? th?c th? SinhVien ?
+?     ?? Hai sinh viên cùng thông tin có equals và hashCode b?ng nhau (record equality) ?
+?     ?? Kh?i t?o sinh viên h?p l? thành công ?
+?     ?? Ném NullPointerException khi có tr??ng thông tin b? null ?
+?     ?? Chu?i tr?ng th?a ? hai ??u ???c c?t g?n t? ??ng (strip) ?
+?? JUnit Vintage ?
+?? JUnit Platform Suite ?
+Test run finished after 97 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         4 tests found           ]
+[         0 tests skipped         ]
+[         4 tests started         ]
+[         0 tests aborted         ]
+[         4 tests successful      ]
+[         0 tests failed          ]
+=> Kết quả lần 1: ĐẠT
+
+================================================================================
+ĐẠT
+================================================================================
+Chi tiết: 1/1 lần kiểm thử đều thành công.
+Kết quả kiểm thử đã được lưu vào: D:\DaiHoc\Nam3\ĐỒ ÁN JAVA\project-Điểm danh lớp học qua mạng nội bộ\docs\ket-qua-kiem-thu.txt
