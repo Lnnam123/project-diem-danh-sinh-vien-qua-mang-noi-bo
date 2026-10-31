@@ -1,6 +1,6 @@
 ﻿================================================================================
 KIỂM THỬ TỰ ĐỘNG - ĐỀ TÀI 43: ĐIỂM DANH LỚP HỌC QUA MẠNG NỘI BỘ
-Thời gian kiểm thử: 2026-10-31 21:38:37
+Thời gian kiểm thử: 2026-10-31 21:39:51
 Môi trường: Java JDK 21 | JUnit 5 Platform Console Standalone
 ================================================================================
 [1/3] Xoá thư mục bin/ cũ và khởi tạo lại...
@@ -42,10 +42,12 @@ Biên dịch thành công 32 tệp Java!
 ?  ?  ?? F10: X? lý an toàn khi s? s? b?ng 0 (không b? ArithmeticException) ?
 ?  ?? Ki?m th? T?ng L?u Tr? CSV - Ch?c n?ng F02 ?
 ?  ?  ?? Ném ngo?i l? khi dòng CSV sai ??nh d?ng (thi?u c?t) ?
+?  ?  ?? F11: Xu?t k?t qu? bu?i ?i?m danh ra file CSV chính xác ?
 ?  ?  ?? ??c file CSV r?ng (ho?c ch? có header) tr? v? Map r?ng ?
 ?  ?  ?? ??c file CSV danh sách l?p h?p l? thành công v?i ti?ng Vi?t UTF-8 ?
 ?  ?  ?? Ném ngo?i l? khi trùng l?p mã sinh viên trong file CSV ?
 ?  ?  ?? Ném ngo?i l? khi ???ng d?n null ho?c file không t?n t?i ?
+?  ?  ?? F15: ??c l?ch s? các bu?i h?c t? th? m?c CSV ?? ph?c v? th?ng kê c? k? ?
 ?  ?? Ki?m th? mô hình LuotDiemDanh (F01) ?
 ?  ?  ?? Hai l??t ?i?m danh cùng thông tin có equals và hashCode b?ng nhau ?
 ?  ?  ?? Kh?i t?o l??t ?i?m danh h?p l? và c?t kho?ng tr?ng th?a ?
@@ -60,18 +62,18 @@ Biên dịch thành công 32 tệp Java!
 ?     ?? F04: Gi?ng viên ?óng phiên th? công tr??c gi? thì h?y h?n gi? thành công ?
 ?? JUnit Vintage ?
 ?? JUnit Platform Suite ?
-Test run finished after 3693 ms
+Test run finished after 3767 ms
 [        10 containers found      ]
 [         0 containers skipped    ]
 [        10 containers started    ]
 [         0 containers aborted    ]
 [        10 containers successful ]
 [         0 containers failed     ]
-[        38 tests found           ]
+[        40 tests found           ]
 [         0 tests skipped         ]
-[        38 tests started         ]
+[        40 tests started         ]
 [         0 tests aborted         ]
-[        38 tests successful      ]
+[        40 tests successful      ]
 [         0 tests failed          ]
 => Kết quả lần 1: ĐẠT
 

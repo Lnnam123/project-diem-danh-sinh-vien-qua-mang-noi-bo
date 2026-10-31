@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,5 +102,52 @@ class CsvStorageServiceTest {
         Files.writeString(fileTrung, content, StandardCharsets.UTF_8);
 
         assertThrows(DiemDanhException.class, () -> storageService.docDanhSachLop(fileTrung));
+    }
+
+    @Test
+    @DisplayName("F11: Xuất kết quả buổi điểm danh ra file CSV chính xác")
+    void xuatKetQuaBuoiChinhXac() throws DiemDanhException, IOException {
+        Path xuatFile = tempDir.resolve("ket-qua/buoi-01.csv");
+        vn.dau.diemdanh.model.PhienDiemDanh phien = new vn.dau.diemdanh.model.PhienDiemDanh(
+                "P01",
+                java.time.LocalDateTime.now(),
+                15,
+                vn.dau.diemdanh.model.TrangThaiPhien.DA_DONG
+        );
+        SinhVien sv1 = new SinhVien("SV01", "Nguyễn Văn A", "22CNTT1");
+        SinhVien sv2 = new SinhVien("SV02", "Trần Thị B", "22CNTT1");
+        List<SinhVien> dsLop = List.of(sv1, sv2);
+        Set<String> setCoMat = Set.of("SV01");
+
+        storageService.xuatKetQuaBuoi(xuatFile, phien, dsLop, setCoMat);
+
+        assertTrue(Files.exists(xuatFile));
+        List<String> lines = Files.readAllLines(xuatFile, StandardCharsets.UTF_8);
+        assertTrue(lines.size() >= 3);
+        assertEquals("maSV,hoTen,lop,trangThai", lines.get(0));
+        assertTrue(lines.get(1).contains("SV01") && lines.get(1).contains("CO_MAT"));
+        assertTrue(lines.get(2).contains("SV02") && lines.get(2).contains("VANG"));
+    }
+
+    @Test
+    @DisplayName("F15: Đọc lịch sử các buổi học từ thư mục CSV để phục vụ thống kê cả kỳ")
+    void docLichSuCacBuoi() throws DiemDanhException, IOException {
+        Path thuMucLichSu = tempDir.resolve("lich-su");
+        Files.createDirectories(thuMucLichSu);
+
+        Path b1 = thuMucLichSu.resolve("buoi-P01.csv");
+        String c1 = """
+                maSV,hoTen,lop,trangThai
+                SV01,Nguyễn Văn A,22CNTT1,CO_MAT
+                SV02,Trần Thị B,22CNTT1,VANG
+                """;
+        Files.writeString(b1, c1, StandardCharsets.UTF_8);
+
+        List<vn.dau.diemdanh.model.BuoiDiemDanh> dsBuoi = storageService.docLichSuCacBuoi(thuMucLichSu);
+
+        assertEquals(1, dsBuoi.size());
+        assertEquals("buoi-P01", dsBuoi.get(0).maPhien());
+        assertTrue(dsBuoi.get(0).danhSachMaSVCoMat().contains("SV01"));
+        assertFalse(dsBuoi.get(0).danhSachMaSVCoMat().contains("SV02"));
     }
 }
