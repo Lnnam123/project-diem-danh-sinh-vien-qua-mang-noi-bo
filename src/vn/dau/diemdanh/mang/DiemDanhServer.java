@@ -2,7 +2,9 @@ package vn.dau.diemdanh.mang;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import vn.dau.diemdanh.nghiepvu.DiemDanhService;
 
 /**
@@ -16,6 +18,7 @@ public class DiemDanhServer {
     private volatile boolean isRunning;
     private ServerSocket serverSocket;
     private ExecutorService threadPool;
+    private Thread listenerThread;
 
     public DiemDanhServer(int port, DiemDanhService service) {
         this.port = port;
@@ -23,16 +26,64 @@ public class DiemDanhServer {
         this.isRunning = false;
     }
 
-    public void start() throws IOException {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+    /**
+     * F07: Khởi động máy chủ Socket và bể luồng phục vụ kết nối máy khách.
+     */
+    public synchronized void start() throws IOException {
+        if (isRunning) {
+            return;
+        }
+
+        this.serverSocket = new ServerSocket(port);
+        this.threadPool = Executors.newFixedThreadPool(15);
+        this.isRunning = true;
+
+        this.listenerThread = new Thread(() -> {
+            while (isRunning && !serverSocket.isClosed()) {
+                try {
+                    Socket clientSocket = serverSocket.accept();
+                    if (!isRunning) {
+                        clientSocket.close();
+                        break;
+                    }
+                    threadPool.submit(new ClientHandler(clientSocket, service));
+                } catch (IOException e) {
+                    if (!isRunning) {
+                        break;
+                    }
+                }
+            }
+        }, "DiemDanhServer-Listener");
+        this.listenerThread.setDaemon(true);
+        this.listenerThread.start();
     }
 
-    public void stop() {
-        throw new UnsupportedOperationException("Chưa cài đặt");
+    /**
+     * F07: Dừng máy chủ, đóng ServerSocket và giải phóng bể luồng an toàn.
+     */
+    public synchronized void stop() {
+        if (!isRunning) {
+            return;
+        }
+        this.isRunning = false;
+
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException ignored) {
+        }
+
+        if (threadPool != null && !threadPool.isShutdown()) {
+            threadPool.shutdownNow();
+        }
     }
 
     public boolean isRunning() {
         return isRunning;
     }
-}
 
+    public int getPort() {
+        return serverSocket != null ? serverSocket.getLocalPort() : port;
+    }
+}
